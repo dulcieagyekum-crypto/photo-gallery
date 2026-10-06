@@ -7,8 +7,8 @@ on:
 
 env:
   PROJECT_ID: 'dulcie-photo-gallery'
-  REGION: 'us-central1'
-  GAR_LOCATION: 'us-central1'
+  REGION: 'europe-west1'
+  GAR_LOCATION: 'europe-west1'
   REPOSITORY: 'photo-gallery'
   SERVICE_NAME: 'photo-gallery'
   WORKLOAD_IDENTITY_PROVIDER: 'projects/610301849036/locations/global/workloadIdentityPools/github-pool/providers/github-provider'
