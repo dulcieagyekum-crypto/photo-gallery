@@ -1,0 +1,35 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: photo-gallery
+  annotations:
+    run.googleapis.com/launch-stage: BETA
+spec:
+  template:
+    metadata:
+      annotations:
+        run.googleapis.com/execution-environment: gen2
+        run.googleapis.com/vpc-access-connector: projects/YOUR_PROJECT_ID/locations/YOUR_REGION/connectors/YOUR_VPC_CONNECTOR
+        run.googleapis.com/vpc-access-egress: private-ranges-only
+    spec:
+      serviceAccountName: app-runtime-sa@YOUR_PROJECT_ID.iam.gserviceaccount.com
+      containers:
+        - image: LOCATION-docker.pkg.dev/YOUR_PROJECT_ID/YOUR_REPO/YOUR_IMAGE:latest
+          env:
+            - name: PORT
+              value: "8080"
+          volumeMounts:
+            - name: gcs-volume
+              mountPath: /mnt/gcs
+            - name: filestore-volume
+              mountPath: /mnt/filestore
+      volumes:
+        - name: gcs-volume
+          csi:
+            driver: gcsfuse.run.googleapis.com
+            volumeAttributes:
+              bucketName: YOUR_GCS_BUCKET_NAME
+        - name: filestore-volume
+          nfs:
+            server: FILESTORE_IP_ADDRESS
+            path: /FILESTORE_SHARE_NAME
