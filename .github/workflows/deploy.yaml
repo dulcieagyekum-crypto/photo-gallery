@@ -6,13 +6,13 @@ on:
       - main
 
 env:
-  PROJECT_ID: 'your-actual-project-id'
+  PROJECT_ID: 'dulcie-photo-gallery'
   REGION: 'us-central1'
   GAR_LOCATION: 'us-central1'
   REPOSITORY: 'photo-gallery'
   SERVICE_NAME: 'photo-gallery'
   WORKLOAD_IDENTITY_PROVIDER: 'projects/123456789012/locations/global/workloadIdentityPools/github-pool/providers/github-provider'
-  SERVICE_ACCOUNT: 'deployer-sa@your-actual-project-id.iam.gserviceaccount.com'
+  SERVICE_ACCOUNT: 'deployer-sa@dulcie-photo-gallery.iam.gserviceaccount.com'
 
 jobs:
   deploy:
