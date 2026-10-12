@@ -49,13 +49,9 @@ jobs:
           docker build -t $IMAGE_TAG .
           docker push $IMAGE_TAG
 
-      - name: Update Image Reference in service.yaml
-        run: |-
-          IMAGE_TAG="${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.SERVICE_NAME }}:${{ github.sha }}"
-          sed -i "s|LOCATION-docker.pkg.dev/YOUR_PROJECT_ID/YOUR_REPO/YOUR_IMAGE:latest|$IMAGE_TAG|g" service.yaml
-
       - name: Deploy to Cloud Run
         uses: google-github-actions/deploy-cloudrun@v2
         with:
-          metadata: 'service.yaml'
+          service: ${{ env.SERVICE_NAME }}
           region: ${{ env.REGION }}
+          image: "${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.SERVICE_NAME }}:${{ github.sha }}"
