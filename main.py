@@ -757,7 +757,7 @@ def gallery():
                     "filename": filename,
                     "caption": caption,
                     "uploader": uploader,
-                    "bucket": BUCKET_NAME,
+                    "bucket-Dulcie": BUCKET_NAME,
                     "content_type": photo.content_type,
                     "uploaded_at": firestore.SERVER_TIMESTAMP,
                 })
